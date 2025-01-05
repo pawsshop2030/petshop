@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import cloudinary from 'cloudinary'
 import cors from 'cors'
-
+import path from 'path'
 // user defined
 import connectDB from './db/connectDB.js';
 import authRoute from './routes/auth_route.js'
@@ -42,6 +42,15 @@ app.use('/api/auth',authRoute)
 app.use('/api/admin/product',productRoute)
 app.use('/api/user',userRoute)
 app.use('/api/order', orderRoute)
+
+
+const __dirname = path.resolve();
+if(process.env.APP_ON === 'production'){
+    app.use(express.static(path.join(__dirname,'/frontend','build')));
+    app.use("*",(req,res)=> {
+        res.sendFile(path.resolve(__dirname,"frontend","build",'index.html'))
+    })
+}
 
 const PORT = process.env.PORT
 app.listen(PORT ,() =>{ 
