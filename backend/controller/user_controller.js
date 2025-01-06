@@ -1,5 +1,6 @@
 import User from '../models/user_model.js';
 import Product from '../models/product_model.js';
+import Order from '../models/order_model.js';
 
 export const addToCart = async (req, res) => {
   try {
@@ -10,7 +11,6 @@ export const addToCart = async (req, res) => {
 
     if (user.myCart.includes(prdid)) {
       // If the product is already in the cart, remove it
-      console.log(user._id)
       await User.updateOne({_id : user._id},{ $pull: { myCart: prdid } });
       
       return res.json({ message: 'Cart removed' });
@@ -41,6 +41,23 @@ export const getCart = async (req, res) => {
 
   } catch (err) {
     console.log('Error in getCart route: \n', err);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+export const getOrder = async (req, res) => {
+  try {
+    
+    const user = req.user
+
+    const productsOrdered = await Order.find({_id : {$in:user?.myOrders}}).populate('productID')
+    res.json(productsOrdered)
+    
+
+    
+
+
+  } catch (err) {
+    console.log('Error in getOrder route: \n', err);
     return res.status(500).json({ error: 'Internal server error' });
   }
 };

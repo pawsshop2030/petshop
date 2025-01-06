@@ -28,9 +28,9 @@ const Products = ({ searchItem , searchCategory , searchTag}) => {
 
   // Filter products based on search term
   const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchItem.toLowerCase()) && 
-    product.category.toLowerCase().includes(searchCategory?.toLowerCase() || '') &&
-    product.tag.toLowerCase().includes(searchTag?.toLowerCase() || '')
+    product.name?.toLowerCase().includes(searchItem.toLowerCase()) && 
+    product.category?.toLowerCase().includes(searchCategory?.toLowerCase() || '') &&
+    product.tag?.toLowerCase().includes(searchTag?.toLowerCase() || '')
 );
 
   if (isLoading) {

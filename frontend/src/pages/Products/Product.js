@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams , useNavigate } from 'react-router-dom';
 import { useMutation, useQuery ,useQueryClient } from '@tanstack/react-query';
 
 import { baseURL } from '../../constant/url.js';
@@ -82,6 +82,12 @@ const Product = () => {
       })
     }
   })
+
+  const navigate = useNavigate();
+  const handleOrder = () => {
+    navigate(`/order/${prdid}`)
+  }
+  
   // Filter out the current product from the list of all products
   const otherProducts = products.filter(product => {return product._id !== prdid}) ;
 
@@ -115,7 +121,7 @@ const Product = () => {
           <p className="text-2xl lg:text-3xl font-semibold text-center lg:text-left">{product.price || 'Product Price'}</p>
           <div className=''>
             
-          <button className="btn btn-primary w-full lg:w-auto self-center lg:self-start m-1">Buy Now</button>
+          <button className="btn btn-primary w-full lg:w-auto self-center lg:self-start m-1" onClick={handleOrder}>Buy Now</button>
           { !authUser.myCart.includes(prdid) &&
             <button className="btn btn-primary w-full lg:w-auto self-center lg:self-start m-1" onClick={handleCart}>To Cart</button>}
           </div>

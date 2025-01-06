@@ -34,7 +34,7 @@ const userSchema = mongoose.Schema({
         ref : 'Products',
         default: []
     }]
-})
+},{timestamps : true})
 
 const User = mongoose.model('User',userSchema);
 export default User;

@@ -7,7 +7,11 @@ import Signup from './pages/auth/Signup.js';
 import Login from './pages/auth/Login.js';
 import HomePage from './pages/home/HomePage.js';
 import Product from './pages/Products/Product.js';
-import MyCart from './components/User.js/MyCart.js';
+import MyCart from './components/User/MyCart.js';
+import MyOrder from './components/User/MyOrder.js'
+import ProfilePage from './components/User/ProfilePage.js';
+import OrderProcedure from './components/Order/OrderProcedure.js'
+import Test from './Test.js';
 
 export const userContext = createContext(null);
 
@@ -65,12 +69,28 @@ const App = () => {
             element={authUser ? <Product /> : <Navigate to="/login" />}
           />
           <Route
+            path="/order/:prdid"
+            element={authUser ? <OrderProcedure /> : <Navigate to="/login" />}
+          />
+          <Route
             path="/user/cart"
             element={authUser ? <MyCart /> : <Navigate to="/login" />}
           />
           <Route
+            path="/user/profile"
+            element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/user/orders"
+            element={authUser ? <MyOrder/> : <Navigate to="/login" />}
+          />
+          <Route
             path="/"
             element={authUser ? <HomePage /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/test"
+            element={<Test/>}
           />
           <Route path="/*" element={<h1>Page not ready</h1>} />
         </Routes>
