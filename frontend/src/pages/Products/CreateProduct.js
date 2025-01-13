@@ -2,7 +2,7 @@ import React, { useState , useRef } from "react";
 import { toast } from "react-hot-toast";
 import { AiOutlineWarning } from "react-icons/ai";
 import { useMutation } from "@tanstack/react-query";
-import {baseURL} from './constant/url.js'
+import {baseURL} from '../../constant/url.js'
 const ProductForm = () => {
   const [formData, setFormData] = useState({
     name: "",

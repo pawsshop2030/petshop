@@ -109,12 +109,13 @@ const Product = () => {
       </nav>
 
       {/* Product Details */}
-      <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10 p-5 lg:p-20">
-        <img
-          src={product.image}
-          alt={product.name || 'Product Image'}
-          className="w-full max-w-sm lg:max-w-md rounded-lg shadow-md border-2 border-black"
-        />
+      <div className="flex flex-col lg:flex-row items-center  lg:items-start gap-10 p-5 lg:p-20">
+      <img
+        src={product.productImage}
+        alt={product.name || 'Product Image'}
+        className="w-auto h-[500px] max-w-sm lg:max-w-md rounded-lg shadow-md border-2 border-black"
+      />
+
         <div className="flex flex-col gap-6 max-w-md">
           <h1 className="text-3xl lg:text-5xl font-bold text-center lg:text-left">{product.name || 'Product Name'}</h1>
           <p className="text-lg lg:text-xl text-center lg:text-left">{product.description || 'Product Description'}</p>

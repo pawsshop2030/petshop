@@ -1,6 +1,7 @@
 import React, { createContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Route, Routes, Navigate } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 import { baseURL } from './constant/url.js';
 import Signup from './pages/auth/Signup.js';
@@ -11,6 +12,7 @@ import MyCart from './components/User/MyCart.js';
 import MyOrder from './components/User/MyOrder.js'
 import ProfilePage from './components/User/ProfilePage.js';
 import OrderProcedure from './components/Order/OrderProcedure.js'
+import CreateProduct from './pages/Products/CreateProduct.js'
 import Test from './Test.js';
 
 export const userContext = createContext(null);
@@ -69,6 +71,10 @@ const App = () => {
             element={authUser ? <Product /> : <Navigate to="/login" />}
           />
           <Route
+            path="/createproduct"
+            element={authUser ? <CreateProduct /> : <Navigate to="/login" />}
+          />
+          <Route
             path="/order/:prdid"
             element={authUser ? <OrderProcedure /> : <Navigate to="/login" />}
           />
@@ -88,12 +94,13 @@ const App = () => {
             path="/"
             element={authUser ? <HomePage /> : <Navigate to="/login" />}
           />
-          <Route
+          {/* <Route
             path="/test"
             element={<Test/>}
-          />
+          /> */}
           <Route path="/*" element={<h1>Page not ready</h1>} />
         </Routes>
+        <Toaster/>
       </div>
     </userContext.Provider>
   );
