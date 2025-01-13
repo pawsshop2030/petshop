@@ -46,7 +46,7 @@ const HomePage = () => {
       {/* Navbar */}
       <nav className="bg-yellow-500 text-neutral-content">
         <div className="flex-1">
-          <a className="btn btn-ghost normal-case text-xl">PetShop</a>
+          <a className="btn btn-ghost normal-case text-xl">SUN SHINE </a>
         </div>
 
         <div className="flex justify-evenly">
