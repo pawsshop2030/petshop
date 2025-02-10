@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import petimg1 from '../../assets/images/petimg1.jpg'
 
 import { baseURL } from "../../constant/url";
 
@@ -18,6 +19,9 @@ const SidebarWithButton = () => {
 
   const handleClickProfile = () => {
     navigate('/user/profile'); // Correct path for profile
+  };
+  const handleClickContactus = () => {
+    navigate('/user/contact'); // Correct path for profile
   };
 
   const handleClickOrders = () => {
@@ -56,7 +60,7 @@ const SidebarWithButton = () => {
       >
         <img
           className="object-cover mix-blend-multiply w-full h-full"
-          src="https://via.placeholder.com/150"
+          src={petimg1}
           alt="Icon"
         />
       </button>
@@ -89,6 +93,12 @@ const SidebarWithButton = () => {
             onClick={handleClickOrders} // Updated navigation for orders
           >
             My Orders
+          </div>
+          <div
+            className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+            onClick={handleClickContactus} // Updated navigation for orders
+          >
+            Contact us
           </div>
           
           <div

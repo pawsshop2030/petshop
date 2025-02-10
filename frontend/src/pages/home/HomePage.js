@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Products from '../Products/Products.js';
 import ProfileBar from './ProfileBar.js';
 import { baseURL } from '../../constant/url.js';
-
+import logo3 from '../../assets/images/logo3.jpg'
 const HomePage = () => {
   const [searchItem, setSearchItem] = useState('');
   const [categories, setCategories] = useState([]); // Initialize as an empty array
   const [tags, setTags] = useState([]); // Initialize as an empty array
   const [searchCategory, setSearchCategory] = useState(''); // Initialize as an empty array
   const [searchTag, setSearchTag] = useState(''); // Initialize as an empty array
+  const Navigate = useNavigate();
 
   const filter = async (field) => {
     try {
@@ -39,6 +41,7 @@ const HomePage = () => {
     };
 
     fetchCategories();
+    
   }, []); // Empty dependency array ensures this runs only once when the component mounts
 
   return (
@@ -46,7 +49,8 @@ const HomePage = () => {
       {/* Navbar */}
       <nav className="bg-yellow-500 text-neutral-content">
         <div className="flex-1">
-          <a className="btn btn-ghost normal-case text-xl">SUN SHINE </a>
+          <a onClick={() => {Navigate('user/contact')}} className="btn btn-ghost normal-case text-xl">SUN SHINE 
+          <img src={logo3} className='max-h-10'></img></a>
         </div>
 
         <div className="flex justify-evenly">
@@ -82,9 +86,9 @@ const HomePage = () => {
       </nav>
 
       {/* Carousel */}
-      <div className="carousel w-full mt-5">
-        <div id="slide1" className="carousel-item relative w-full">
-          <img src="https://via.placeholder.com/800x300" className="w-full" alt="Slide 1" />
+      {/* <div className="carousel w-full mt-5">
+        <div id="slide1" className="carousel-item relative w-full border-black border-2 min-h-32">
+          <img src='' className="w-full min-h-4 min-w-10" alt="Slide 1" />
           <a href="#slide3" className="btn btn-circle absolute left-5 top-1/2">❮</a>
           <a href="#slide2" className="btn btn-circle absolute right-5 top-1/2">❯</a>
         </div>
@@ -98,7 +102,7 @@ const HomePage = () => {
           <a href="#slide2" className="btn btn-circle absolute left-5 top-1/2">❮</a>
           <a href="#slide1" className="btn btn-circle absolute right-5 top-1/2">❯</a>
         </div>
-      </div>
+      </div> */}
 
       {/* Product List */}
       <Products 

@@ -119,7 +119,7 @@ const Product = () => {
         <div className="flex flex-col gap-6 max-w-md">
           <h1 className="text-3xl lg:text-5xl font-bold text-center lg:text-left">{product.name || 'Product Name'}</h1>
           <p className="text-lg lg:text-xl text-center lg:text-left">{product.description || 'Product Description'}</p>
-          <p className="text-2xl lg:text-3xl font-semibold text-center lg:text-left">{product.price || 'Product Price'}</p>
+          <p className="text-2xl lg:text-3xl font-semibold text-center lg:text-left">₹ {product.price || 'Product Price'}</p>
           <div className=''>
             
           <button className="btn btn-primary w-full lg:w-auto self-center lg:self-start m-1" onClick={handleOrder}>Buy Now</button>

@@ -13,6 +13,7 @@ import MyOrder from './components/User/MyOrder.js'
 import ProfilePage from './components/User/ProfilePage.js';
 import OrderProcedure from './components/Order/OrderProcedure.js'
 import CreateProduct from './pages/Products/CreateProduct.js'
+import Contactus from './pages/home/Contactus.js';
 import Test from './Test.js';
 
 export const userContext = createContext(null);
@@ -87,6 +88,10 @@ const App = () => {
             element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
           />
           <Route
+            path="/user/contact"
+            element={authUser ? <Contactus /> : <Navigate to="/login" />}
+          />
+          <Route
             path="/user/orders"
             element={authUser ? <MyOrder/> : <Navigate to="/login" />}
           />
@@ -94,10 +99,10 @@ const App = () => {
             path="/"
             element={authUser ? <HomePage /> : <Navigate to="/login" />}
           />
-          {/* <Route
+          <Route
             path="/test"
             element={<Test/>}
-          /> */}
+          />
           <Route path="/*" element={<h1>Page not ready</h1>} />
         </Routes>
         <Toaster/>

@@ -1,223 +1,110 @@
-import React, { useState , useRef } from "react";
-import { toast } from "react-hot-toast";
-import { AiOutlineWarning } from "react-icons/ai";
-import { useMutation } from "@tanstack/react-query";
-import {baseURL} from './constant/url.js'
-const ProductForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    tag: "",
-    category: "",
-    price: "",
-    inStock: "Out of Stock",
-    description: "",
-    // productImage: null,
-  });
-  const imgRef = useRef();
-	const [img, setImg] = useState(null);
+import { useState } from "react";
+import { FaEdit, FaSave } from "react-icons/fa";
 
+export default function ProfilePage() {
+  const [isEditing, setIsEditing] = useState(false);
+  const [user, setUser] = useState({
+    username: "johndoe",
+    email: "johndoe@example.com",
+    phone: "123-456-7890",
+    password: "password123",
+    profileImage: "https://via.placeholder.com/150",
+  });
 
   const handleChange = (e) => {
-    const { name, value, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: name === "inStock" ? (checked ? "In Stock" : "Out of Stock") : value,
-    });
-  };
-
-  const handleImgChange = (e) => {
-		const file = e.target.files[0];
-		if (file) {
-			const reader = new FileReader();
-			reader.onload = () => {
-				setImg(reader.result);
-			};
-			reader.readAsDataURL(file);
-		}
-	};
-
-  
-
-  const { mutate: addProduct, isPending, error } = useMutation({
-    mutationFn: async () => {
-      const data = {
-        name : formData.name,
-        tag : formData.tag, 
-        category : formData.category, 
-        inStock : formData.inStock, 
-        description : formData.description, 
-        price : formData.price,
-        productImage : img 
-       }
-      const res = await fetch(`${baseURL}/api/admin/product/add`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data ),
-      });
-      if (!res.ok) throw new Error("Failed to add product");
-      console.log(res);
-    },
-    onError: () => {
-      toast.error("Error: " + error?.message);
-    },
-    onSuccess: () => {
-      toast.success("Product added successfully!");
-    },
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Check for empty fields
-    if (!formData.name) {
-      toast.error("Please fill out the product name.", {
-        icon: <AiOutlineWarning size={20} className="text-red-500" />,
-      });
-      document.querySelector("input[name='name']").focus();
-      return;
-    }
-    if (!formData.category) {
-      toast.error("Please fill out the category.", {
-        icon: <AiOutlineWarning size={20} className="text-red-500" />,
-      });
-      document.querySelector("input[name='category']").focus();
-      return;
-    }
-    if (!formData.price) {
-      toast.error("Please fill out the price.", {
-        icon: <AiOutlineWarning size={20} className="text-red-500" />,
-      });
-      document.querySelector("input[name='price']").focus();
-      return;
-    }
-    // console.log(formData)
-    const summa = addProduct();
+    const { name, value } = e.target;
+    setUser((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <form onSubmit={handleSubmit} className="bg-base-200 p-6 rounded-lg shadow-md space-y-4">
-        <h2 className="text-2xl font-bold">Add Product</h2>
-
-        {/* Name Input */}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Product Name</span>
-          </label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Enter product name"
-            className="input input-bordered"
-            required
-          />
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-100 to-purple-200">
+      <div className="card w-96 bg-white shadow-2xl rounded-2xl overflow-hidden">
+        <div className="card-body p-6 space-y-5">
+          <div className="flex flex-col items-center">
+            <img
+              src={user.profileImage}
+              alt="Profile"
+              className="w-32 h-32 rounded-full border-4 border-blue-500 transition-all duration-300 ease-in-out hover:scale-105"
+            />
+            {isEditing ? (
+              <input
+                type="text"
+                name="profileImage"
+                value={user.profileImage}
+                onChange={handleChange}
+                className="input input-bordered mt-3 w-full max-w-xs text-center"
+                placeholder="Profile Image URL"
+              />
+            ) : null}
+          </div>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-lg font-semibold text-gray-700">Username:</label>
+              <input
+                type="text"
+                name="username"
+                value={user.username}
+                onChange={handleChange}
+                disabled={!isEditing}
+                className="input input-bordered w-full"
+                placeholder="Enter your username"
+              />
+            </div>
+            <div>
+              <label className="block text-lg font-semibold text-gray-700">Email:</label>
+              <input
+                type="email"
+                name="email"
+                value={user.email}
+                onChange={handleChange}
+                disabled={!isEditing}
+                className="input input-bordered w-full"
+                placeholder="Enter your email"
+              />
+            </div>
+            <div>
+              <label className="block text-lg font-semibold text-gray-700">Phone:</label>
+              <input
+                type="text"
+                name="phone"
+                value={user.phone}
+                onChange={handleChange}
+                disabled={!isEditing}
+                className="input input-bordered w-full"
+                placeholder="Enter your phone number"
+              />
+            </div>
+            <div>
+              <label className="block text-lg font-semibold text-gray-700">Password:</label>
+              <input
+                type="password"
+                name="password"
+                value={user.password}
+                onChange={handleChange}
+                disabled={!isEditing}
+                className="input input-bordered w-full"
+                placeholder="Enter your password"
+              />
+            </div>
+          </div>
+          <div className="mt-5 flex justify-center space-x-4">
+            <button
+              className="btn btn-primary w-32 py-2 rounded-lg shadow-md transform hover:scale-105 transition-all duration-300"
+              onClick={() => setIsEditing(!isEditing)}
+            >
+              {isEditing ? (
+                <>
+                  <FaSave className="inline mr-2" /> Save
+                </>
+              ) : (
+                <>
+                  <FaEdit className="inline mr-2" /> Edit
+                </>
+              )}
+            </button>
+          </div>
         </div>
-
-        {/* Tag Input */}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Tag</span>
-          </label>
-          <input
-            type="text"
-            name="tag"
-            value={formData.tag}
-            onChange={handleChange}
-            placeholder="Enter product tag"
-            className="input input-bordered"
-          />
-        </div>
-
-        {/* Category Input */}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Category</span>
-          </label>
-          <input
-            type="text"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            placeholder="Enter product category"
-            className="input input-bordered"
-            required
-          />
-        </div>
-
-        {/* Price Input */}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Price</span>
-          </label>
-          <input
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            placeholder="Enter product price"
-            className="input input-bordered"
-            min="0"
-            required
-          />
-        </div>
-
-        {/* In Stock Display */}
-        <div className="form-control flex flex-row gap-7">
-          <label className="label">
-            <span className="label-text">Stock Status : </span>
-          </label>
-          
-          <input
-            type="checkbox"
-            name="inStock"
-            checked={formData.inStock === 'In Stock'}
-            onChange={handleChange}
-            className="toggle toggle-primary mt-2"
-          />
-        </div>
-
-        {/* Description Textarea */}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Description</span>
-          </label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="Enter product description"
-            className="textarea textarea-bordered"
-          ></textarea>
-        </div>
-
-        {/* Product Image Upload */}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Product Image</span>
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImgChange}
-            ref = {imgRef}
-            className="file-input file-input-bordered"
-          />
-        </div>
-
-        {/* Submit Button */}
-        <div className="form-control mt-4">
-          <button type="submit" className={`btn btn-primary ${isPending ? "loading" : ""}`} disabled={isPending}>
-            {isPending ? "Submitting..." : "Submit"}
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
-};
-
-export default ProductForm;
+}

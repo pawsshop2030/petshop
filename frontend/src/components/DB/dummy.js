@@ -150,3 +150,21 @@ export const dummyDB = [
         "review": []
     }
 ]
+
+export const contactus = {
+    shopName : `Sun Shine Pets and Aquaruim`,
+    openStatus : {
+        openingHour: 8, // 8 AM
+        closingHour: 21, // 9 PM
+        isShopOpen: function () {
+            const now = new Date();
+            const currentHour = now.getHours();
+            // console.log(currentHour >= this.openingHour && currentHour < this.closingHour)
+            return currentHour >= this.openingHour && currentHour < this.closingHour;
+        }
+    },
+    address : `Krishnapuram,\nOpposite IOB Bank,\nSomanur Road`,
+    email : `rahulrajesh2777@gmail.com`,
+    instagram :``,
+    whatsApp : `9790543561`,
+}

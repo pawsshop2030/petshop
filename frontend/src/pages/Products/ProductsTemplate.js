@@ -24,7 +24,7 @@ const ProductsTemplate = ({ product , status = null }) => {
       {/* Product Info */}
       <div className="p-4 cursor-default" >
         <h2 className="card-title ">{product?.name}</h2>
-        <p>${product?.price}</p>
+        <p>₹ {product?.price}</p>
         {status && 
           <p>status : {status}</p>
         }
