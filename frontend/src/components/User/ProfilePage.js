@@ -13,7 +13,7 @@ const ProfilePage = () => {
           {/* Profile Image */}
           <div className="avatar mb-4">
             <div className="w-24 h-24 rounded-full ring ring-yellow-400 ring-offset-2">
-              <img src={authUser.profileImage} alt="Profile" />
+              <img src={authUser.profileImage || 'https://placehold.co/400'} alt="Profile" />
             </div>
           </div>
 

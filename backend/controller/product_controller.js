@@ -36,8 +36,8 @@ export const editProduct = async(req , res) => {
         const {prdid} = req.params;
         const {name , tag , category , price , inStock , description  } = req.body;
         let {productImage} = req.body;
-        
         const product = await Product.findOne({_id : prdid});
+        // const product = await Product.findOne({_id : prdid});
         if(!product){
             return res.status(400).json({error : 'no product found'});
         }

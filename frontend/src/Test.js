@@ -22,7 +22,7 @@ export default function ProfilePage() {
         <div className="card-body p-6 space-y-5">
           <div className="flex flex-col items-center">
             <img
-              src={user.profileImage}
+              src={user.profileImage || 'https://placehold.co/400'}
               alt="Profile"
               className="w-32 h-32 rounded-full border-4 border-blue-500 transition-all duration-300 ease-in-out hover:scale-105"
             />

@@ -165,6 +165,6 @@ export const contactus = {
     },
     address : `Krishnapuram,\nOpposite IOB Bank,\nSomanur Road`,
     email : `rahulrajesh2777@gmail.com`,
-    instagram :``,
-    whatsApp : `9790543561`,
+    instagram :`sunshine_pets_and_aquarium`,
+    whatsApp : `+919790543561`,
 }

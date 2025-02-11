@@ -13,6 +13,7 @@ import MyOrder from './components/User/MyOrder.js'
 import ProfilePage from './components/User/ProfilePage.js';
 import OrderProcedure from './components/Order/OrderProcedure.js'
 import CreateProduct from './pages/Products/CreateProduct.js'
+import UpdateProduct from './pages/Products/UpdateProduct.js'
 import Contactus from './pages/home/Contactus.js';
 import Test from './Test.js';
 
@@ -35,7 +36,7 @@ const App = () => {
         if (!res.ok) {
           throw new Error(resData.error || 'Something went wrong');
         }
-        console.log('data : ', resData);
+        // console.log('data : ', resData);
         return resData;
       } catch (err) {
         console.log('error in app.js :', err.message);
@@ -70,6 +71,10 @@ const App = () => {
           <Route
             path="/product/:prdid"
             element={authUser ? <Product /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/product/:prdid/update"
+            element={authUser ? <UpdateProduct /> : <Navigate to="/login" />}
           />
           <Route
             path="/createproduct"

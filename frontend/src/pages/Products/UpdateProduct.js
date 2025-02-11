@@ -1,9 +1,12 @@
-import React, { useState , useRef } from "react";
+import React, { useState , useRef, use, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { AiOutlineWarning } from "react-icons/ai";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation , useQuery } from "@tanstack/react-query";
 import {baseURL} from '../../constant/url.js'
-const ProductForm = () => {
+import { useParams } from "react-router-dom";
+const UpdateProduct = () => {
+  const {prdid } = useParams();
+
   const [formData, setFormData] = useState({
     name: "",
     tag: "",
@@ -15,6 +18,28 @@ const ProductForm = () => {
   });
   const imgRef = useRef();
 	const [img, setImg] = useState(null);
+
+  // fetching product data
+  const { data: product, isLoading: isProductLoading, } = useQuery({
+    queryKey : ['updateproduct'],
+    queryFn :async () => {
+      const response = await fetch(`${baseURL}/api/admin/product/prd/${prdid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong');
+      }
+      return data;
+    },
+    
+      enabled: !!prdid, // Ensures the query runs only if prdid is available
+      }
+    
+  );
 
 
   const handleChange = (e) => {
@@ -38,7 +63,7 @@ const ProductForm = () => {
 
   
 
-  const { mutate: addProduct, isPending, error } = useMutation({
+  const { mutate: updateProduct, isPending, error } = useMutation({
     mutationFn: async () => {
       const data = {
         name : formData.name,
@@ -49,22 +74,27 @@ const ProductForm = () => {
         price : formData.price,
         productImage : img 
        }
-      const res = await fetch(`${baseURL}/api/admin/product/add`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data ),
-      });
-      if (!res.ok) throw new Error("Failed to add product");
-      console.log(res);
+       try {
+        const res = await fetch(`${baseURL}/api/admin/product/prd/${prdid}`, {
+          method: "PATCH",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data ),
+        });
+        if (!res.ok) throw new Error("Failed to update product");
+        console.log(res);
+       } catch (error) {
+          console.log(error)
+       }
+     
     },
     onError: () => {
       toast.error("Error: " + error?.message);
     },
     onSuccess: () => {
-      toast.success("Product added successfully!");
+      toast.success("Product updated successfully!");
     },
   });
 
@@ -93,14 +123,29 @@ const ProductForm = () => {
       document.querySelector("input[name='price']").focus();
       return;
     }
-    // console.log(formData)
-    const summa = await addProduct();
+    console.log(formData)
+    await updateProduct();
   };
+
+  useEffect(() => {
+    setFormData({
+      name: product?.name||"",
+      tag: product?.tag||"",
+      category: product?.category||"",
+      price: product?.price||"",
+      inStock: product?.inStock||"Out of Stock",
+      description: product?.description||"",
+    })
+  },[product])
+
+  if(isProductLoading){
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container mx-auto p-4">
       <form onSubmit={handleSubmit} className="bg-base-200 p-6 rounded-lg shadow-md space-y-4">
-        <h2 className="text-2xl font-bold">Add Product</h2>
+        <h2 className="text-2xl font-bold">Update Product</h2>
 
         {/* Name Input */}
         <div className="form-control">
@@ -217,7 +262,7 @@ const ProductForm = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default ProductForm;
+export default UpdateProduct

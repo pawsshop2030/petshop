@@ -111,7 +111,7 @@ const Product = () => {
       {/* Product Details */}
       <div className="flex flex-col lg:flex-row items-center  lg:items-start gap-10 p-5 lg:p-20">
       <img
-        src={product.productImage}
+        src={product?.productImage || 'https://placehold.co/400'}
         alt={product.name || 'Product Image'}
         className="w-auto h-[500px] max-w-sm lg:max-w-md rounded-lg shadow-md border-2 border-black"
       />

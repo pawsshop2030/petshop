@@ -30,7 +30,7 @@ const ContactUs = () => {
         <p className="text-center text-gray-600 text-lg">📍 {contactus.address}</p>
         <p className="text-center text-blue-600 text-lg">📧 {contactus.email}</p>
         <div className="flex justify-center gap-6 mt-6">
-          <a href="https://instagram.com/yourshop" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-primary flex items-center gap-2 px-5 py-3 text-lg rounded-full shadow-md hover:shadow-lg transition-all">
+          <a href={`https://instagram.com/${contactus.instagram}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-primary flex items-center gap-2 px-5 py-3 text-lg rounded-full shadow-md hover:shadow-lg transition-all">
             <FaInstagram className="text-2xl" /> Instagram
           </a>
           <a href={`https://wa.me/${contactus.whatsApp}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-success flex items-center gap-2 px-5 py-3 text-lg rounded-full shadow-md hover:shadow-lg transition-all">

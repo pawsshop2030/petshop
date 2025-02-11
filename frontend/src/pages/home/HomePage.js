@@ -85,24 +85,7 @@ const HomePage = () => {
         </div>
       </nav>
 
-      {/* Carousel */}
-      {/* <div className="carousel w-full mt-5">
-        <div id="slide1" className="carousel-item relative w-full border-black border-2 min-h-32">
-          <img src='' className="w-full min-h-4 min-w-10" alt="Slide 1" />
-          <a href="#slide3" className="btn btn-circle absolute left-5 top-1/2">❮</a>
-          <a href="#slide2" className="btn btn-circle absolute right-5 top-1/2">❯</a>
-        </div>
-        <div id="slide2" className="carousel-item relative w-full">
-          <img src="https://via.placeholder.com/800x300" className="w-full" alt="Slide 2" />
-          <a href="#slide1" className="btn btn-circle absolute left-5 top-1/2">❮</a>
-          <a href="#slide3" className="btn btn-circle absolute right-5 top-1/2">❯</a>
-        </div>
-        <div id="slide3" className="carousel-item relative w-full">
-          <img src="https://via.placeholder.com/800x300" className="w-full" alt="Slide 3" />
-          <a href="#slide2" className="btn btn-circle absolute left-5 top-1/2">❮</a>
-          <a href="#slide1" className="btn btn-circle absolute right-5 top-1/2">❯</a>
-        </div>
-      </div> */}
+      
 
       {/* Product List */}
       <Products 
