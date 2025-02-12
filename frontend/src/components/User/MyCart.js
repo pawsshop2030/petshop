@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import ProductsTemplate from '../../pages/Products/ProductsTemplate';
 import { baseURL } from '../../constant/url';
+import BackToHome from '../Fixed/BackToHome';
 
 const MyCart = () => {
 
@@ -41,12 +42,7 @@ const MyCart = () => {
 
   return (
     <div >
-        <nav className="bg-yellow-500 text-neutral-content p-4 flex justify-between items-center">
-        <Link to="/">
-          <button className="btn btn-ghost text-lg">❮ Home</button>
-        </Link>
-
-      </nav>
+        <BackToHome/>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5">
 
         {

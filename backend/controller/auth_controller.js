@@ -38,7 +38,8 @@ export const signup = async(req , res) => {
             username ,
             password : hashedPass,
             email,
-            phone
+            phone,
+            profileImage : `https://avatar.iran.liara.run/username?username=${username}`
         })
 
         if(newUser){

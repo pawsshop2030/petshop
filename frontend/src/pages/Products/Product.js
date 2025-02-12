@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { Link, useParams , useNavigate } from 'react-router-dom';
+import { useParams , useNavigate } from 'react-router-dom';
 import { useMutation, useQuery ,useQueryClient } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
 import { baseURL } from '../../constant/url.js';
-
+import BackToHome from '../../components/Fixed/BackToHome.js'
 import ProductsTemplate from './ProductsTemplate.js';
 import { userContext } from '../../App.js';
 
@@ -72,9 +73,11 @@ const Product = () => {
         if (!response.ok) {
           throw new Error(data.error || 'Something went wrong');
         }
-        console.log(data)
+        // console.log(data)
+        toast.success('added to cart')
       } catch (error) {
-        console.log(error)
+        // console.log(error)
+        toast.error('can\'t adding to cart now\ntry again')
       }
     },onSuccess : () => {
       queryClient.invalidateQueries({
@@ -102,11 +105,7 @@ const Product = () => {
   return (
     <div className="bg-base-200 min-h-screen">
       {/* Navbar */}
-      <nav className="bg-yellow-500 text-neutral-content p-4 flex justify-between items-center">
-        <Link to="/">
-          <button className="btn btn-ghost text-lg">❮ Home</button>
-        </Link>
-      </nav>
+      <BackToHome/>
 
       {/* Product Details */}
       <div className="flex flex-col lg:flex-row items-center  lg:items-start gap-10 p-5 lg:p-20">

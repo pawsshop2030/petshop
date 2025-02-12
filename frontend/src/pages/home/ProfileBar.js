@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState , useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import petimg1 from '../../assets/images/petimg1.jpg'
+import { userContext } from '../../App.js';
+
 
 import { baseURL } from "../../constant/url";
 
 const SidebarWithButton = () => {
+    const authUser = useContext(userContext)
+  
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const navigate = useNavigate();
   
@@ -60,7 +64,7 @@ const SidebarWithButton = () => {
       >
         <img
           className="object-cover mix-blend-multiply w-full h-full"
-          src={petimg1}
+          src={authUser?.profileImage||petimg1}
           alt="Icon"
         />
       </button>

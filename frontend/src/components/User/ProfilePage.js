@@ -1,12 +1,15 @@
 import React , { useContext }from 'react';
 
 import { userContext } from '../../App.js';
+import BackToHome from '../Fixed/BackToHome.js';
 
 const ProfilePage = () => {
   // Replace this with actual data from your API or context
   const authUser = useContext(userContext)
 
   return (
+    <>
+    <BackToHome/>
     <div className="flex justify-center items-center min-h-screen bg-yellow-100">
       <div className="card w-96 bg-white shadow-xl p-5">
         <div className="flex flex-col items-center">
@@ -30,6 +33,7 @@ const ProfilePage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
