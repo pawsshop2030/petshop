@@ -13,7 +13,7 @@ import toast from 'react-hot-toast';
 
 const Signup = () => {
 	
-
+	const queryClient = useQueryClient()
     const [formData , setFormData] = useState({
         email : "",
         username : "",
@@ -49,6 +49,9 @@ const Signup = () => {
 		onSuccess : () => {
 			toast.success('SignUp Success')
 			// const queryClient =useQueryClient({refetchQueries : ['authUser']})
+			queryClient.invalidateQueries({
+				queryKey : ["authUser"]
+			})
 		}
 	})
 

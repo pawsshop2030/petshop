@@ -7,6 +7,7 @@ import { FaUser } from "react-icons/fa";
 import { MdPassword } from "react-icons/md";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { baseURL } from '../../constant/url.js'
+import toast from 'react-hot-toast';
 
 
 const Login = () => {
@@ -37,7 +38,8 @@ const Login = () => {
 			}
 		},
 		onSuccess : () => {
-			console.log("success login")
+			// console.log("success login")
+			toast.success('loging in...')
 			// refetch the page i.e. reloading the page
 			queryClient.invalidateQueries({
 				queryKey : ["authUser"]

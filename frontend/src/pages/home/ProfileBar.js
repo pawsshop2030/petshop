@@ -56,10 +56,10 @@ const SidebarWithButton = () => {
   }
 
   return (
-    <div className="relative z-10 text-black">
+    <div className="  z-10 text-black">
       {/* Button */}
       <button
-        className="btn btn-circle bg-yellow-500 hover:bg-yellow-600 ml-2 overflow-hidden"
+        className="btn btn-circle hover:bg-opacity-25 ml-2 overflow-hidden"
         onClick={toggleSidebar}
       >
         <img

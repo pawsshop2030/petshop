@@ -7,6 +7,7 @@ import ProfileBar from './ProfileBar.js';
 import { baseURL } from '../../constant/url.js';
 import logo3 from '../../assets/images/logo3.jpg'
 import { aboutUs } from '../../components/DB/dummy.js';
+import banner1 from '../../assets/images/banner1.jpg'
 
 const HomePage = () => {
   const [searchItem, setSearchItem] = useState('');
@@ -63,31 +64,35 @@ const HomePage = () => {
   return (
     <div className="bg-base-200 text-black">
       {/* Navbar */}
-      <nav className="bg-yellow-500 text-white">
-        <div className="flex justify-between">
+      <nav className="h-32 p-4" style={{
+            backgroundImage: `url(${banner1})`,
+            backgroundSize : 'contain'
+
+          }}>
+        <div className="flex justify-between ">
           <div>
             <a onClick={() => {Navigate('user/contact')}} className="btn btn-ghost normal-case text-xl">SUN SHINE 
             <img src={logo3} className='max-h-10'></img></a>
           </div>
-          <div className='pr-5 '>
+          <div className='flex '>
             <button onClick={() => {
               toast.custom((t) => <AboutUsToast t={t} message={aboutUs}/> , { duration: Infinity })
             }} className='mx-2 underline  hover:shadow-yellow-800 hover:shadow-lg'>About us</button>
             <button onClick={() => {Navigate('user/contact')}} className='mx-2 underline  hover:shadow-yellow-800 hover:shadow-lg'>Contact us</button>
           </div>
         </div>
-
-        <div className="flex justify-evenly">
+          <div className='flex justify-between'>
+        <div className="flex  ">
           {/* Search */}
           <input
             type="text"
             placeholder="Search for products..."
             value={searchItem}
             onChange={(e) => setSearchItem(e.target.value)}
-            className="mb-1 input input-bordered w-full max-w-xs text-black"
+            className="mb-1 input input-bordered w-full max-w-xs text-black flex-grow-1 md:min-w-60"
           />
           {/* Category */}
-          <select className="mb-1 select select-bordered w-full max-w-xs text-black" onChange={(e) => {setSearchCategory(e.target.value)}}>
+          <select className="mb-1 select select-bordered md:min-w-60  max-w-xs flex-grow-1 text-black" onChange={(e) => {setSearchCategory(e.target.value)}}>
               <option value=''>category</option>
             {categories.map((category, index) => (
               <option key={index} value={category}>
@@ -96,7 +101,7 @@ const HomePage = () => {
             ))}
           </select>
           {/* Tags */}
-          <select className="mb-1 select select-bordered w-full max-w-xs  text-black" onChange={(e) => {setSearchTag(e.target.value)}}>
+          <select className="mb-1 select select-bordered w-full max-w-xs flex-grow-1 md:min-w-60 text-black" onChange={(e) => {setSearchTag(e.target.value)}}>
               <option value=''>tag</option>
             {tags.map((tag, index) => (
               <option key={index} value={tag}>
@@ -104,8 +109,12 @@ const HomePage = () => {
               </option>
             ))}
           </select>
+          </div>
           {/* Account */}
-          <ProfileBar />
+          <div className="flex justify-center items-center max-w-10 md:mr-10 flex-grow-0">
+
+          <ProfileBar  />
+        </div>
         </div>
       </nav>
 
