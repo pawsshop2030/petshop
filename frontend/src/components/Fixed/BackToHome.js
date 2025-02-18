@@ -11,6 +11,7 @@ const BackToHome = () => {
         <Link to="/">
           <button className="btn btn-ghost text-lg">❮ Home</button>
         </Link>
+        {/*  */}
       </nav>
   )
 }
