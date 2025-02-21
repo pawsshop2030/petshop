@@ -1,13 +1,14 @@
 import React , {useState} from 'react'
 import { Link } from 'react-router-dom';
-
+import logo3 from '../../assets/images/logo3.jpg'
 
 // icons
-import { FaUser } from "react-icons/fa";
+import { MdOutlineMail } from "react-icons/md";
 import { MdPassword } from "react-icons/md";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { baseURL } from '../../constant/url.js'
 import toast from 'react-hot-toast';
+import pagebg from '../../assets/images/loginBG.jpg'
 
 
 const Login = () => {
@@ -58,11 +59,14 @@ const Login = () => {
 
 	
   return (
-    <div> 
+    <div className = 'min-h-screen' style={{
+			backgroundImage : `url(${pagebg})`,
+			backgroundSize : 'cover',
+			backgroundRepeat : 'no-repeat'
+		}}> 
         <div>
 		<Link to='/' className='flex justify-center md:justify-start'>
-			<p>logo </p>
-                    
+			<img src={logo3} className='max-h-10'></img>                    
 		</Link>
 		</div>
         <div className='flex-1 flex flex-col justify-center items-center'>
@@ -74,7 +78,7 @@ const Login = () => {
 					
 					<div className='flex gap-4 flex-wrap'>
 						<label className='input input-bordered rounded flex items-center gap-2 flex-1'>
-							<FaUser />
+							<MdOutlineMail />
 							<input
 								type='email'
 								className='grow '
