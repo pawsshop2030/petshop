@@ -1,12 +1,11 @@
 import React, { useState , useRef, use, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { AiOutlineWarning } from "react-icons/ai";
-import { useMutation , useQuery } from "@tanstack/react-query";
+import { useMutation , useQuery, useQueryClient } from "@tanstack/react-query";
 import {baseURL} from '../../constant/url.js'
 import { useParams } from "react-router-dom";
 const UpdateProduct = () => {
   const {prdid } = useParams();
-
   const [formData, setFormData] = useState({
     name: "",
     tag: "",

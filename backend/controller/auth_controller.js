@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs'
-
+import cloudinary from 'cloudinary'
 import User from '../models/user_model.js';
 import generateToken from '../utils/generateToken.js'
 
@@ -107,10 +107,45 @@ export const logout =(req , res) => {
 }
 export const me =(req , res) => {
     try {
+
+        
         
         return res.json(req.user)
     } catch (error) {
         console.log('error in logout auth controller : \n',err)
+        return res.status(500).json({error : 'internal server error '})
+    }
+}
+
+export const updateProfile = async(req , res) => {
+    try {
+        const {username ,  phone , email , address , _id} = req.body;
+        let {profileImage} = req.body
+
+        const user = await User.findById(_id)
+        if(!user){
+            return res.status(404).json({message : 'user not found'})
+        }
+        // image
+        if(profileImage){
+            if(user.profileImage !== `https://avatar.iran.liara.run/username?username=${user.username}`){
+                const img = await cloudinary.uploader.upload(profileImage);
+                profileImage = img.secure_url;
+                await cloudinary.uploader.destroy(user.profileImage.split('/').pop().split('.')[0])
+                user.profileImage = profileImage;
+            }else{
+                user.profileImage = `https://avatar.iran.liara.run/username?username=${username}`
+            }
+            
+        }
+        user.username = username || user.username;
+        user.address = address || user.address;
+        user.phone = phone || user.phone;
+        user.email = email || user.email;
+        await user.save();
+        return res.json(user)
+    } catch (error) {
+        console.log('error in updateProfile auth controller : \n',error)
         return res.status(500).json({error : 'internal server error '})
     }
 }

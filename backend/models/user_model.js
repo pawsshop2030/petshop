@@ -22,6 +22,9 @@ const userSchema = mongoose.Schema({
         type : String,
         default : ''
     },
+    address : {
+        type : String,
+    },
     myOrders : [{
         
         type : mongoose.Schema.Types.ObjectId,
