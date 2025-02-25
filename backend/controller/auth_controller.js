@@ -127,8 +127,8 @@ export const updateProfile = async(req , res) => {
             return res.status(404).json({message : 'user not found'})
         }
         // image
-        if(profileImage){
-            if(user.profileImage !== `https://avatar.iran.liara.run/username?username=${user.username}`){
+        
+            if(profileImage && profileImage !== `https://avatar.iran.liara.run/username?username=${user.username}`){
                 const img = await cloudinary.uploader.upload(profileImage);
                 profileImage = img.secure_url;
                 await cloudinary.uploader.destroy(user.profileImage.split('/').pop().split('.')[0])
@@ -137,7 +137,7 @@ export const updateProfile = async(req , res) => {
                 user.profileImage = `https://avatar.iran.liara.run/username?username=${username}`
             }
             
-        }
+        
         user.username = username || user.username;
         user.address = address || user.address;
         user.phone = phone || user.phone;
