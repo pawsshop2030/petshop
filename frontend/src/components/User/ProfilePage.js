@@ -28,6 +28,7 @@ const ProfilePage = () => {
   const {mutate : updateProfile } = useMutation({
     mutationKey: ['updateProfile'],
     mutationFn: async () => {
+
       const res = await fetch(`${baseURL}/api/auth/updateProfile`,{
         method: 'POST',
         headers: {
@@ -59,6 +60,7 @@ const ProfilePage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userData)
+    
     updateProfile();
     queryClient.invalidateQueries({
       queryKey: ['authUser'],

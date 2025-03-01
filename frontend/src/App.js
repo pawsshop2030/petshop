@@ -18,7 +18,6 @@ import Contactus from './pages/home/Contactus.js';
 import Test from './Test.js';
 
 export const userContext = createContext(null);
-
 const App = () => {
   const { data: authUser, isLoading, error } = useQuery({
     queryKey: ['authUser'],
